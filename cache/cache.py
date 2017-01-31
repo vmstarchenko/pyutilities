@@ -1,10 +1,41 @@
 #! /usr/bin/env python3
 
+"""Расширенный кэширующий декоратор.
+
+Description
+
+.. module:: cache
+
+:Example:
+
+>>> from cache import cache
+>>> log = lambda *args, **kargs: print("I print my args", args, kargs)
+>>> cached_log = cache(log)
+>>> cached_log(1, x=3)
+I print my args (1,) {'x': 3}
+>>> cached_log(1, x=3)
+>>>
+
+:Example:
+
+>>> from cache import md5_hash_args, cache
+>>> from urllib.request import urlopen
+>>> storage = dict()
+>>> cached_urlopen = cache(urlopen, storage, md5_hash_args)
+>>> cached_urlopen("https://www.python.org/").read()[:50]
+b'<!doctype html>\n<!--[if lt IE 7]>   <html class="n'
+>>>
+
+.. todo:: Сделать class Storage, который сохраняет кэш в json
+.. todo:: Добавить тесты и описание
+
+"""
+
 from hashlib import md5 as hashlib_md5
 
 
 def simple_hash_args(args, kargs):
-    """Find simple hash for function arguments.
+    """Находит хэш для аргументов.
 
     Sort kargs and calc hash(args, tuple(kargs))
 
@@ -25,9 +56,7 @@ def simple_hash_args(args, kargs):
 
 
 def md5_hash_args(args, kargs):
-    """Find hash for function arguments using md5 hash.
-
-    Sort kargs and calc md5((args, tuple(kargs)))
+    """Находит хэш для аргументов используя md5.
 
     :param args: ordered arguments
     :type args: tuple
@@ -47,16 +76,16 @@ def md5_hash_args(args, kargs):
 
 
 def cache(function, storage=None, hash_function=simple_hash_args):
-    """Cache decorator.
+    """Кэширующий декоратор.
 
     Обёрнутая функция имеет `force_call` аттрибут, который может использоваться
     для принудительного вызова первоначальной функции. Вызов `force_call`
     обновляет значение в кэше.
 
-    :param function: wraped function
-    :param storage: mapable object used for saving cache
-    :param hash_function: used for hashing arguments
-    :returns: same value as function
+    :param function: Оборачиваемая функция
+    :param storage: Объект для сохранения кэша
+    :param hash_function: Функция, хэширующая аргументы
+    :returns: Значение вызываемой функции
 
     """
     storage = dict() if storage is None else storage
@@ -71,6 +100,7 @@ def cache(function, storage=None, hash_function=simple_hash_args):
         return data
 
     def force_call(*args, **kargs):
+        """Принудтельно вызвать функцю и обновить кэш."""
         args_hash = hash_function(args, kargs)
         data = function(*args, **kargs)
         storage[args_hash] = data
