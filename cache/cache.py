@@ -2,7 +2,13 @@
 
 """Расширенный кэширующий декоратор.
 
-Description
+Оборачивает функцию, кэшируя результат от входных параметров.
+
+В классе `storage` должны быть реализованы следующие методы:
+ * __contains__(self, value)
+ * __getitem__(self, value)
+ * __setitem__(self, key, value)
+ * clear(self)
 
 .. module:: cache
 
@@ -34,42 +40,33 @@ from hashlib import md5 as hashlib_md5
 from json import loads as json_loads, dumps as json_dumps
 
 
-class JsonStorage:
+class JsonStorage(dict):
     """Сохраняет кэш в json файлы.
 
     :Example:
 
     >>> storage = JsonStorage("test.json")
     >>> storage
-    {{}}
+    {}
 
     """
 
     def __init__(self, filename, initial_value=None):
-        initial_value = {} if initial_value is None else initial_value
-        self.filename = str(filename)
+        self._filename = str(filename)
         try:
             with open(filename, 'r') as file:
-                self.data = json_loads(file.read())
+                super(JsonStorage, self).__init__(json_loads(file.read()))
         except (FileNotFoundError, ValueError):
-            self.data = initial_value
+            initial_value = {} if initial_value is None else initial_value
+            super(JsonStorage, self).__init__(initial_value)
 
     def __del__(self):
-        with open(self.filename, 'w') as file:
-            file.write(json_dumps(self.data))
+        with open(self._filename, 'w') as file:
+            file.write(json_dumps(self))
         del self
 
     def __repr__(self):
-        return '{%r}' % self.data
-
-    def __contains__(self, value):
-        return value in self.data
-
-    def __getitem__(self, value):
-        return self.data[value]
-
-    def __setitem__(self, key, value):
-        self.data[key] = value
+        return super(JsonStorage, self).__repr__()
 
 
 def simple_hash_args(args, kargs):
@@ -110,7 +107,7 @@ def md5_hash_args(args, kargs):
     kargs = list(kargs.items())
     kargs.sort()
     return str(hashlib_md5(('%s:%s' % (repr(args), repr(tuple(kargs)))).encode())
-               .digest())
+               .digest())[2:-1]
 
 
 def cache(function, storage=None, hash_function=simple_hash_args):
@@ -144,8 +141,13 @@ def cache(function, storage=None, hash_function=simple_hash_args):
         storage[args_hash] = data
         return data
 
+    def cache_clear():
+        """Clear storage object"""
+        storage.clear()
+
     cached.__doc__ = function.__doc__
     cached.force_call = force_call
+    cached.cache_clear = cache_clear
     return cached
 
 
@@ -154,12 +156,17 @@ def main():
         print('call', args, kargs)
         return (args, kargs)
 
-    storage = JsonStorage('005.json')
+    storage = JsonStorage('.005.json')
     test_func = cache(test_func, storage, md5_hash_args)
 
     test_func(2, k=1)
     test_func(2, k=1)
     test_func(2, k=3)
+    print("Clear")
+    test_func.cache_clear()
+    test_func(2, k=1)
+    test_func(2, k=1)
+    test_func(2, k=1)
     print('Storage:', storage)
 
 
