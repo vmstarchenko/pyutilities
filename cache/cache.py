@@ -14,7 +14,6 @@ Description
 >>> cached_log(1, x=3)
 I print my args (1,) {'x': 3}
 >>> cached_log(1, x=3)
->>>
 
 :Example:
 
@@ -24,14 +23,53 @@ I print my args (1,) {'x': 3}
 >>> cached_urlopen = cache(urlopen, storage, md5_hash_args)
 >>> cached_urlopen("https://www.python.org/").read()[:50]
 b'<!doctype html>\n<!--[if lt IE 7]>   <html class="n'
->>>
 
-.. todo:: Сделать class Storage, который сохраняет кэш в json
+.. todo:: Сделать class FileSystemStorage, который сохраняет кэш в
+    файловой системе
 .. todo:: Добавить тесты и описание
 
 """
 
 from hashlib import md5 as hashlib_md5
+from json import loads as json_loads, dumps as json_dumps
+
+
+class JsonStorage:
+    """Сохраняет кэш в json файлы.
+
+    :Example:
+
+    >>> storage = JsonStorage("test.json")
+    >>> storage
+    {{}}
+
+    """
+
+    def __init__(self, filename, initial_value=None):
+        initial_value = {} if initial_value is None else initial_value
+        self.filename = str(filename)
+        try:
+            with open(filename, 'r') as file:
+                self.data = json_loads(file.read())
+        except (FileNotFoundError, ValueError):
+            self.data = initial_value
+
+    def __del__(self):
+        with open(self.filename, 'w') as file:
+            file.write(json_dumps(self.data))
+        del self
+
+    def __repr__(self):
+        return '{%r}' % self.data
+
+    def __contains__(self, value):
+        return value in self.data
+
+    def __getitem__(self, value):
+        return self.data[value]
+
+    def __setitem__(self, key, value):
+        self.data[key] = value
 
 
 def simple_hash_args(args, kargs):
@@ -71,8 +109,8 @@ def md5_hash_args(args, kargs):
     """
     kargs = list(kargs.items())
     kargs.sort()
-    return hashlib_md5(('%s:%s' % (repr(args), repr(tuple(kargs)))).encode()) \
-        .digest()
+    return str(hashlib_md5(('%s:%s' % (repr(args), repr(tuple(kargs)))).encode())
+               .digest())
 
 
 def cache(function, storage=None, hash_function=simple_hash_args):
@@ -93,7 +131,7 @@ def cache(function, storage=None, hash_function=simple_hash_args):
     def cached(*args, **kargs):
         args_hash = hash_function(args, kargs)
         if args_hash in storage:
-            data = storage.get(args_hash)
+            data = storage[args_hash]
             return data
         data = function(*args, **kargs)
         storage[args_hash] = data
@@ -112,18 +150,16 @@ def cache(function, storage=None, hash_function=simple_hash_args):
 
 
 def main():
-
     def test_func(*args, **kargs):
         print('call', args, kargs)
         return (args, kargs)
 
-    storage = dict()
+    storage = JsonStorage('005.json')
     test_func = cache(test_func, storage, md5_hash_args)
 
     test_func(2, k=1)
     test_func(2, k=1)
-    test_func(2, k=1)
-    test_func.force_call(2, k=1)
+    test_func(2, k=3)
     print('Storage:', storage)
 
 
