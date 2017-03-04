@@ -28,12 +28,12 @@ Some tools for python
 execute finally
     ```
 
-    - Чтобы объект мог учавствовать в контекстном операторе необходимо реализовать
-      методы `__enter__` и `__exit__`.
+  - Чтобы объект мог учавствовать в контекстном операторе необходимо реализовать
+    методы `__enter__` и `__exit__`.
 
-    - `yield` имеет некоторые приложения:
-      * `yield from`
-      * `value = (yield value)`
-      * `generator.send`, `generator.throw`, `generator.close`
+  - `yield` имеет некоторые приложения:
+    * `yield from`
+    * `value = (yield value)`
+    * `generator.send`, `generator.throw`, `generator.close`
 
-    - Надо бы почитать про ключевое слово `async`
+  - Надо бы почитать про ключевое слово `async`
