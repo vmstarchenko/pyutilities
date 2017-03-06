@@ -37,3 +37,6 @@ execute finally
     * `generator.send`, `generator.throw`, `generator.close`
 
   - Надо бы почитать про ключевое слово `async`
+
+  - `import inspect` содержит какую-то магию. С его помощью можно, например,
+    получить сигнатуру функции.
