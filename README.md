@@ -80,7 +80,7 @@ Some tools for python
       принимающей `self` как первый аргумент)
 
     * `@property` - объявляет функцию класса свойством. Также к такому
-      свойству можно объявить `setter` и `deletter`.
+      свойству можно объявить `setter` и `deleter`.
       ```python
       class Foo:
           ...
