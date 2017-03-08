@@ -120,7 +120,9 @@ Some tools for python
     'hllwrld'
     >>> s.translate(str.maketrans({'o':'', ' ': '', 'e':''})) # Уже лечше
     'hllwrld'
-    >>> s.translate(str.maketrans({'o':'e', 'e':'o'})) # Бывает незаменимо без костылей
-    'holle werld'
+    >>> s.translate(str.maketrans('o':'e', 'e':'o', ' ':''})) # Бывает незаменимо без костылей
+    'hollewerld'
+    >>> s.translate(str.maketrans('oe', 'eo', ''))            # Более короткий вариант записи
+    'hollewerld'
     ```
 
