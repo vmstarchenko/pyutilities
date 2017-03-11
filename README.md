@@ -122,7 +122,24 @@ Some tools for python
     'hllwrld'
     >>> s.translate(str.maketrans('o':'e', 'e':'o', ' ':''})) # Бывает незаменимо без костылей
     'hollewerld'
-    >>> s.translate(str.maketrans('oe', 'eo', ' '))            # Более короткий вариант записи
+    >>> s.translate(str.maketrans('oe', 'eo', ' '))           # Более короткий вариант записи
     'hollewerld'
     ```
+
+  - Может быть это сверх очевидно, но для меня было открытием, что питон поддерживает
+    такой синтаксис:
+    ```python
+    >>> class A():
+    ...     def __getitem__(self, value):
+    ...         print(value)
+    ...
+    >>> data = A()
+    >>> data[['magic']]
+    ['magic']
+    >>> data[1, 1, 4, 7]
+    (1, 1, 4, 7)
+    >>> data[::-1, 1, 1:1, "lol", lambda _: _]
+    (slice(None, None, -1), 1, slice(1, 1, None), 'lol', <function <lambda> at 0x7f95a619cea0>)
+    ```
+
 
