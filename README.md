@@ -142,4 +142,8 @@ Some tools for python
     (slice(None, None, -1), 1, slice(1, 1, None), 'lol', <function <lambda> at 0x7f95a619cea0>)
     ```
 
-
+  - Профайлеры используются для сбора статистики по работе программы. Например, сколько по времени/памяти работают
+    функции или отдельные строки.
+    * В стандартной библиотеке есть некоторые тулзы ([Глава 27](https://docs.python.org/3.6/library/profile.html)). 
+    * [Тут](https://habrahabr.ru/company/mailru/blog/202832/) норм всё описано, в том числе как всё использовать
+    * [Тут](https://www.huyng.com/posts/python-performance-analysis) тоже есть что-то.
