@@ -145,5 +145,10 @@ Some tools for python
   - Профайлеры используются для сбора статистики по работе программы. Например, сколько по времени/памяти работают
     функции или отдельные строки.
     * В стандартной библиотеке есть некоторые тулзы ([Глава 27](https://docs.python.org/3.6/library/profile.html)). 
-    * [Тут](https://habrahabr.ru/company/mailru/blog/202832/) норм всё описано, в том числе как всё использовать
+    * В этом цикле статей 
+    ([1](https://habrahabr.ru/company/mailru/blog/201778/),
+    [2](https://habrahabr.ru/company/mailru/blog/202832/),
+    3,
+    [4(про дебаг, но тоде интересно)](https://habrahabr.ru/company/mailru/blog/205426/))
+    всё очень круто описано, в том числе как всё использовать
     * [Тут](https://www.huyng.com/posts/python-performance-analysis) тоже есть что-то.
