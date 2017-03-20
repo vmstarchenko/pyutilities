@@ -152,3 +152,9 @@ Some tools for python
     [4(про дебаг, но тоде интересно)](https://habrahabr.ru/company/mailru/blog/205426/))
     всё очень круто описано, в том числе как всё использовать
     * [Тут](https://www.huyng.com/posts/python-performance-analysis) тоже есть что-то.
+
+  - Про интерпретаторы
+    * [Как]( https://m.habrahabr.ru/post/124418/) написать интерпретатор своего собственного языка программирования (PyPy).
+    * [Статья](https://m.habrahabr.ru/post/209812/) про интерпретаторы питона.
+      CPython, Cython, Jython, IronPython, PyPy, Brython и другие.
+    * [Ещё что-то](http://www.opennet.ru/opennews/art.shtml?num=31482).
