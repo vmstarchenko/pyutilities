@@ -150,9 +150,9 @@
     функции или отдельные строки.
     * В стандартной библиотеке есть некоторые тулзы ([Глава 27](https://docs.python.org/3.6/library/profile.html)). 
     * В этом цикле статей 
-    ([1](https://habrahabr.ru/company/mailru/blog/201778/),
-    [2](https://habrahabr.ru/company/mailru/blog/202832/),
-    3,
+    ([1](https://habrahabr.ru/company/mailru/blog/201594/),
+    [2](https://habrahabr.ru/company/mailru/blog/201778/),
+    [3](https://habrahabr.ru/company/mailru/blog/202832/),
     [4(про дебаг, но тоде интересно)](https://habrahabr.ru/company/mailru/blog/205426/))
     всё очень круто описано, в том числе как всё использовать
     * [Тут](https://www.huyng.com/posts/python-performance-analysis) тоже есть что-то.
