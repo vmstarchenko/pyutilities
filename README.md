@@ -146,4 +146,19 @@
     (slice(None, None, -1), 1, slice(1, 1, None), 'lol', <function <lambda> at 0x7f95a619cea0>)
     ```
 
+  - Профайлеры используются для сбора статистики по работе программы. Например, сколько по времени/памяти работают
+    функции или отдельные строки.
+    * В стандартной библиотеке есть некоторые тулзы ([Глава 27](https://docs.python.org/3.6/library/profile.html)). 
+    * В этом цикле статей 
+    ([1](https://habrahabr.ru/company/mailru/blog/201778/),
+    [2](https://habrahabr.ru/company/mailru/blog/202832/),
+    3,
+    [4(про дебаг, но тоде интересно)](https://habrahabr.ru/company/mailru/blog/205426/))
+    всё очень круто описано, в том числе как всё использовать
+    * [Тут](https://www.huyng.com/posts/python-performance-analysis) тоже есть что-то.
 
+  - Про интерпретаторы
+    * [Как]( https://m.habrahabr.ru/post/124418/) написать интерпретатор своего собственного языка программирования (PyPy).
+    * [Статья](https://m.habrahabr.ru/post/209812/) про интерпретаторы питона.
+      CPython, Cython, Jython, IronPython, PyPy, Brython и другие.
+    * [Ещё что-то](http://www.opennet.ru/opennews/art.shtml?num=31482).
