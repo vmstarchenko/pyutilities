@@ -40,7 +40,7 @@
 - Urls
   * `django.conf.urls.url`
   * `django.conf.urls.include`
-
+  * `django.contrib.auth.views.login`
 
 - Templates:
   * `static`: позволяет из django динамически передавать url путь к статике.
