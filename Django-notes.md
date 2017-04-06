@@ -66,3 +66,7 @@
     ```
     {% csrf_token %}
     ```
+ 
+- Model
+  * `django.db.models.Model` Основной класс модели.
+  * `django.db.models.signal`

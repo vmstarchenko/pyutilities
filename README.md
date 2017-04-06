@@ -162,3 +162,10 @@
     * [Статья](https://m.habrahabr.ru/post/209812/) про интерпретаторы питона.
       CPython, Cython, Jython, IronPython, PyPy, Brython и другие.
     * [Ещё что-то](http://www.opennet.ru/opennews/art.shtml?num=31482).
+
+  - Из питона можно послылать сигналы.
+    Например это то же самое, что и программа упала с сегфолтом:
+    ```python
+    >>> import signal, os
+    >>> os.kill(os.getpid(), signal.SIGSEGV)
+    ```
