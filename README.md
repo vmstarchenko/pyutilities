@@ -168,3 +168,22 @@
     >>> import signal, os
     >>> os.kill(os.getpid(), signal.SIGSEGV)
     ```
+
+  - Модуль `pathlib` может помочь избежать костылей при наботе с файловой
+    системой. Например, получить расширение файла, имя файла, имя директории,
+    может нормализовать путь и вообще почти всю информацию о файле.
+    Так же содержит вызовы `stat` `lstat`, `mkdir`, `touch` и другие.
+
+  - Иногда нужно сделать что-то типа такого. Это выглядит неочень:
+    ```python
+    filename = 'file.txt'
+    if filename.endswith('pdf') or filename.endswith('txt'):
+        # do smth...
+    ```
+    НО! Оказывается, `str.endswith` (и `str.startswith`) могут принимать
+    объект `tuple`:
+    ```python
+    filename = 'file.txt'
+    if filename.endswith(('pdf', 'txt')):
+        # do smth...
+    ```
