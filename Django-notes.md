@@ -23,6 +23,9 @@
             return ctx
     ```
 
+  * `django.contrib.auth.update_session_auth_hash` - для того чтобы не закрывать
+    сессию после изменения пароля.
+
   * `django.shortcuts.render`
     ```python
     template = get_template(template_name)
@@ -37,10 +40,22 @@
   * `django.shortcuts.render_to_response`
     То же что и `render` но не требует передачи `request`
 
+  * `django.shortcuts.redirect`
+
+  * decorators:
+    - `django.contrib.auth.decorators.login_required`
+
 - Urls
   * `django.conf.urls.url`
   * `django.conf.urls.include`
+  * `django.urls.reverse` - Убирает хардкод из кода
   * `django.contrib.auth.views.login`
+  * `django.contrib.auth.views.logout`
+  * Представления для сброса пароля из `django.contrib.auth.views`
+    - `password_reset`
+    - `password_reset_done`
+    - `password_reset_confirm`
+    - `password_reset_complete`
 
 - Templates:
   * `static`: позволяет из django динамически передавать url путь к статике.
@@ -66,10 +81,29 @@
     ```
     {% csrf_token %}
     ```
+  * `url`: позволяет избавиться от хардкода в шаблонах.
+    ```
+    {% url 'url_name' %}
 
 - Model
   * `django.db.models.Model` Основной класс модели.
-  * `django.db.models.signal`
+  * `django.db.models.signals.post_save`
+    ```python
+    post_save.connect(function, sender=SomeModel)
+    ```
+
+- Forms
+  * `django.forms.ModelForm` - base form class
+  * `django.forms.EmailField`
+  * В `django.contrib.auto.forms` лежат некоторые базовае формы:
+    - `AdminPasswordChangeForm`
+    - `AuthenticationForm`
+    - `PasswordChangeForm` - 
+    - `PasswordResetForm`
+    - `SetPasswordForm`
+    - `UserChangeForm`
+    - `UserCreationForm`
+
 
 - Other
   * django-extensions
