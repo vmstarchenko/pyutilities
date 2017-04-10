@@ -87,6 +87,7 @@
 
 - Model
   * `django.db.models.Model` Основной класс модели.
+  * `django.db.models.Manager`
   * `django.db.models.signals.post_save`
     ```python
     post_save.connect(function, sender=SomeModel)
