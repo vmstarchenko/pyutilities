@@ -98,11 +98,16 @@
   * В `django.contrib.auto.forms` лежат некоторые базовае формы:
     - `AdminPasswordChangeForm`
     - `AuthenticationForm`
-    - `PasswordChangeForm` - 
+    - `PasswordChangeForm` -
     - `PasswordResetForm`
     - `SetPasswordForm`
     - `UserChangeForm`
     - `UserCreationForm`
+
+
+- Admin
+  * `django.contrib.admin.site.register`
+  * `django.contrib.admin.site.site_header`
 
 
 - Other
@@ -118,4 +123,3 @@
     ...
     >>> show_urls(urls.urlpatterns)
     ```
-
