@@ -11,6 +11,8 @@
 
   * `django.template.loader.get_template`
 
+  * `django.views.generic.base.View`:
+
   * `django.views.generic.base.TemplateView`:
     Можно переопределить аттрибут `template_name` и метод `get_context_data`.
     ```python
