@@ -245,11 +245,6 @@
         # do smth...
     ```
 
-  - Если нужно печатать таблицу, я использую
-    `tabulate`. Удобный [модуль](https://pypi.python.org/pypi/tabulate). Может
-    выделять заголовки, делать выравнивание, использовать разные стили (html,
-    latex, grid, fancy_grid, orgtbl, ...).
-
   - Начиная с python3.6 появились форматные строки:
     ```python
     >>> name, age = 'me', 20
@@ -285,8 +280,16 @@
         ...
     ```
 
+## Third party modules:
+  - Если нужно печатать таблицу, я использую
+    `tabulate`. Удобный [модуль](https://pypi.python.org/pypi/tabulate). Может
+    выделять заголовки, делать выравнивание, использовать разные стили (html,
+    latex, grid, fancy_grid, orgtbl, ...).
+
+  - Для задач по асписанию: [apscheduler](https://apscheduler.readthedocs.io/en/latest/)
 
 ## Scripts:
   - `update_cache.py`: скачивает страницы и сохраняет в папке `.page_cache`. В
     качестве конфига использует файл `cache_config.json`, записанный как пары
     {поддиректория: ссылка для скачивания}.
+
